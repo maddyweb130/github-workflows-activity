@@ -9,6 +9,22 @@ jobs:
   update_html_and_readme:
     runs-on: ubuntu-latest
     steps:
-      # Step 1: Checkout the repository
+
       - name: Checkout Repository
         uses: actions/checkout@v3
+        
+
+      - name: Update index.html (Team Leader)
+        if: github.actor == 'maddyweb130'
+        run: |
+          sed -i '/<\/body>/i <p>Updated by Team Leader on '"$(date)"'</p>' index.html
+
+      - name: Update index.html (Member 1)
+        if: github.actor == 'member1-username'
+        run: |
+          sed -i '/<\/body>/i <p>Updated by Member 1 on '"$(date)"'</p>' index.html
+
+      - name: Update index.html (Member 2)
+        if: github.actor == 'member2-username'
+        run: |
+          sed -i '/<\/body>/i <p>Updated by Member 2 on '"$(date)"'</p>' index.html
